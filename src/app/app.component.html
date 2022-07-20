@@ -1,7 +1,21 @@
-<button (click)="onClick()">Click me</button>
-<ng-container *ngIf="state$ | async as state">
-  <h3>Loading: {{state.loading}}</h3>
-  <h3>Error: {{state.error}}</h3>
-  <h3>Response length: {{state.response?.data?.length}}</h3>
-</ng-container>
+<main class="vh-100 d-flex flex-column justify-content-center align-items-center">
+  <div class="card m-5">
+    <div class="card-header">
+      <app-filters [value]="searchValue" (search)="onSearch($event)"></app-filters>
+    </div>
+    <div class="card-body pt-0">
+      <app-list
+        [list]="list$ | async"
+        [loading]="loading$ | async"
+        [error]="error$ | async"
+      ></app-list>
+    </div>
+  </div>
+  <app-pagination
+    [hidden]="isPaginationHidden$ | async"
+    [data]="paginationData$ | async"
+    (pageChange)="onPageChange($event)"
+  ></app-pagination>
+</main>
+
 

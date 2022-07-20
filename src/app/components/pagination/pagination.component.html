@@ -1,0 +1,30 @@
+<nav *ngIf="data" aria-label="Pagination">
+  <ul class="pagination">
+    <li class="page-item" [class.disabled]="isFirstPage">
+      <a
+        class="page-link"
+        [attr.tabindex]="isFirstPage ? -1 : null"
+        [attr.aria-disabled]="isFirstPage || null"
+        href="#"
+        (click)="onPrev()"
+      >Previous</a>
+    </li>
+    <li *ngFor="let page of data.pages" class="page-item" [class.active]="data.activePage === page">
+      <a
+        class="page-link"
+        href="#"
+        (click)="onPageClick(page)"
+        [attr.aria-current]="data.activePage === page ? 'page' : null"
+      >{{ page }}</a>
+    </li>
+    <li class="page-item" [class.disabled]="isLastPage">
+      <a
+        class="page-link"
+        [attr.tabindex]="isLastPage ? -1 : null"
+        [attr.aria-disabled]="isLastPage || null"
+        href="#"
+        (click)="onNext()"
+      >Next</a>
+    </li>
+  </ul>
+</nav>
